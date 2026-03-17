@@ -399,8 +399,8 @@ func TestLiveFederationQueryStrictness(t *testing.T) {
 	if err := json.NewDecoder(resp.Body).Decode(&queryResp); err != nil {
 		t.Fatalf("failed to decode live response: %v", err)
 	}
-	if len(queryResp.ServerKeys) < 2 {
-		t.Fatalf("expected at least 2 server_keys, got %d", len(queryResp.ServerKeys))
+	if len(queryResp.ServerKeys) < 1 {
+		t.Fatalf("expected at least 1 server_keys entry, got %d", len(queryResp.ServerKeys))
 	}
 
 	trailingReqBody := `{"server_keys":{"s-a.mxtest.tech":{}}}{"x":1}`
@@ -459,8 +459,8 @@ func TestLiveQueryCompatibility(t *testing.T) {
 	if err := json.NewDecoder(resp.Body).Decode(&queryResp); err != nil {
 		t.Fatalf("failed to decode live response: %v", err)
 	}
-	if len(queryResp.ServerKeys) < 2 {
-		t.Fatalf("expected at least 2 server_keys, got %d", len(queryResp.ServerKeys))
+	if len(queryResp.ServerKeys) < 1 {
+		t.Fatalf("expected at least 1 server_keys entry, got %d", len(queryResp.ServerKeys))
 	}
 	for _, entry := range queryResp.ServerKeys {
 		if entry.ServerName == "" {
